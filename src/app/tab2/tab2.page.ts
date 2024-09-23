@@ -7,6 +7,18 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  nombre: string;
+  asignatura : string;
 
+  asignaturas = [
+    {nombre: "PGY4121", asignatura: "Programación de aplicaciones"},
+    {nombre: "PGY2121", asignatura: "Desarrollo de bases de datos"},
+    {nombre: "MDY3101", asignatura: "Arquitectura de datos"},
+  ]
+
+
+  constructor() {
+    this.nombre = "Ana Diaz";
+    this.asignatura = "Programación de aplicaciones";
+  }
 }

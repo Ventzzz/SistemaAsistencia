@@ -7,6 +7,26 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  presente: string;
+  asignatura : string;
+  fecha: string;
+  mostrar = false;
 
-}
+  asignaturas = [
+    {asignatura: "Programación de aplicaciones", fecha: "19-09-2021", presente: "Si" },
+    {asignatura: "Desarrollo de bases de datos", fecha: "20-09-2021", presente: "No" },
+    {asignatura: "Arquitectura de datos", fecha: "21-09-2021", presente: "Si"  },
+  ]
+
+
+  constructor() {
+    this.presente = "Si";
+    this.asignatura = "Programación de aplicaciones";
+    this.fecha = "20-09-2023";
+  }
+  verModal()
+  {
+    this.mostrar = !this.mostrar;
+  }
+
+  }

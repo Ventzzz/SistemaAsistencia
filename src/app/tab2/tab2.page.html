@@ -1,7 +1,7 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="false">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Mis asignaturas
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,22 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Mis asignaturas</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <h1>Mis asignaturas</h1>
+  <br><br>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Seccion</ion-label>
+      <ion-label>Asignatura</ion-label>
+    </ion-item>
+    <ion-item *ngFor="let asignatura of asignaturas">
+      <ion-label>{{asignatura.nombre }}</ion-label>
+      <ion-label>{{asignatura.asignatura }}</ion-label> 
+    </ion-item>
+  </ion-list>
+
 </ion-content>
