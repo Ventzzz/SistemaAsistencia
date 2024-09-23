@@ -11,14 +11,14 @@ export class Tab2Page {
   asignatura : string;
 
   asignaturas = [
-    {nombre: "PGY4121", asignatura: "Programación de aplicaciones"},
-    {nombre: "PGY2121", asignatura: "Desarrollo de bases de datos"},
-    {nombre: "MDY3101", asignatura: "Arquitectura de datos"},
+    {nombre: "PJU2314", asignatura: "Programación de aplicaciones"},
+    {nombre: "PJU2413", asignatura: "Desarrollo de bases de datos"},
+    {nombre: "PJY3101", asignatura: "Arquitectura de datos"},
   ]
 
 
   constructor() {
-    this.nombre = "Ana Diaz";
-    this.asignatura = "Programación de aplicaciones";
+    this.nombre = "";
+    this.asignatura = "";
   }
 }
