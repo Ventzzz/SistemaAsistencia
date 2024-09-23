@@ -20,9 +20,9 @@ export class Tab3Page {
 
 
   constructor() {
-    this.presente = "Si";
-    this.asignatura = "Programación de aplicaciones";
-    this.fecha = "20-09-2023";
+    this.presente = "";
+    this.asignatura = "";
+    this.fecha = "";
   }
   verModal()
   {
