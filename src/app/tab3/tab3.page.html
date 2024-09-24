@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Asistencia
-    </ion-title>
+    <ion-title>Asistencia</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,18 +21,18 @@
       <ion-label>Presente</ion-label>
     </ion-item>
     <ion-item *ngFor="let asignatura of asignaturas">
-      <ion-label>{{asignatura.fecha }}</ion-label>
-      <ion-label>{{asignatura.asignatura }}</ion-label> 
-      <ion-label>{{asignatura.presente }}</ion-label> 
+      <ion-label>{{ asignatura.fecha }}</ion-label>
+      <ion-label>{{ asignatura.asignatura }}</ion-label> 
+      <ion-label>{{ asignatura.presente }}</ion-label> 
     </ion-item>
   </ion-list>
 
   <ion-button shape="round" (click)="verModal()">
-    Crear codigo QR
+    Crear código QR
   </ion-button>
+
   <ion-modal [isOpen]="mostrar">
     <ng-template>
-
       <ion-header>
         <ion-toolbar>
           <ion-title>Asistencia</ion-title>
@@ -45,7 +43,11 @@
       </ion-header>
       <ion-content>
         <h3>Escanea para registrar asistencia</h3>
-        <img src="" alt="">
+        
+        <!-- Imagen QR desde internet -->
+        <img src="https://softmatic.com/images/QR%20Example%20Umlauts%20Accented.png" alt="Código QR" style="display: block; margin: 0 auto; width: 400px; height: 212px;">
+
+        
       </ion-content>
     </ng-template>
   </ion-modal>
