@@ -1,39 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
+  formLogin: FormGroup;
+  formRegister: any;
 
-  formLogin: FormGroup; 
-
-  constructor(public fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private navCtrl: NavController
+  ) {
     this.formLogin = this.fb.group({
-      'nombre': new FormControl("",Validators.required),
-      'contraseña': new FormControl("",Validators.required),
-      
-    })
-
+      Nombre: ['', [Validators.required, Validators.minLength(4)]],
+      contraseña: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
 
-  ngOnInit() {
-  }
-  ingresar(){
-    if(this.formLogin.valid){
-      const{nombre, contraseña}= this.formLogin.value;
-      console.log('Nombre', nombre);
-      console.log('Contraseña', contraseña)
-    } else {
-      console.log('Formulario no válido')
+  async ingresar() {
+    if (this.formLogin.valid) {
+      const { Nombre, contraseña } = this.formLogin.value;
+      try {
+        await this.authService.login(Nombre, contraseña);
+        this.navCtrl.navigateRoot(''); 
+      } catch (err: any) { 
+        console.error('Error al iniciar sesión:', err.message);
+      }
     }
   }
 }
