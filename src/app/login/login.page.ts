@@ -11,6 +11,8 @@ import { NavController } from '@ionic/angular';
 export class LoginPage {
   formLogin: FormGroup;
   formRegister: any;
+  mensaje: string = '';
+  fail: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -26,11 +28,13 @@ export class LoginPage {
   async ingresar() {
     if (this.formLogin.valid) {
       const { Nombre, contraseña } = this.formLogin.value;
+      this.fail = false;
       try {
         await this.authService.login(Nombre, contraseña);
         this.navCtrl.navigateRoot(''); 
       } catch (err: any) { 
-        console.error('Error al iniciar sesión:', err.message);
+        this.mensaje = 'Error al iniciar sesión:';
+        this.fail = true;
       }
     }
   }

@@ -5,6 +5,9 @@
 </ion-header>
 
 <ion-content class="ion-padding" color="light">
+  <div *ngIf="fail == true">
+    <ion-toast position="top" id="toastId" isOpen="toastId" message="Su usuario o contraseña son incorrectos" [duration]="5000"></ion-toast>
+  </div>
   <ion-card class="login-card">
     <ion-card-header>
       <ion-card-title class="ion-text-center">Iniciar Sesión</ion-card-title>
