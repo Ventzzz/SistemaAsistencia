@@ -3,14 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { NavController } from '@ionic/angular';
 
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
-})
-export class LoginPage {
-  formLogin: FormGroup;
-  formRegister: any;
+  @Component({
+    selector: 'app-login',
+    templateUrl: './login.page.html',
+    styleUrls: ['./login.page.scss'],
+  })
+
+  export class LoginPage {
+    formLogin: FormGroup;
+    formRegister: any;
   mensaje: string = '';
   fail: boolean = false;
 

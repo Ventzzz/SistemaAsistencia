@@ -15,14 +15,15 @@
 <ion-content [fullscreen]="true" class="duoc-content">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Incio</ion-title>
+      <ion-title size="large">Inicio</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <h1>Bienvenido al sistema RegistrAPP</h1>
 
-  <p>Te damos la bienvenida al sistema {{ '{nombre}' }} {{ '{apellido}' }} 
-  para acceder a tus asignaturas selecciona la pestaña <a href="/tabs/tab2">"Mis asignaturas"</a>,
-  para acceder a tus asistencias selecciona la pestaña <a href="/tabs/tab3">"Asistencia"</a> y para
-  acceder al registro de asignaturas selecciona la pestaña <a href="/tabs/tab3">"Asistencia"</a> y desliza para abajo.</p>
+  <p *ngIf="nombreUsuario">Bienvenido, {{ nombreUsuario }}</p>
+
+  <p>Para acceder a tus asignaturas selecciona la pestaña <a href="/tabs/tab2">"Mis asignaturas"</a>,
+    para acceder a tus asistencias selecciona la pestaña <a href="/tabs/tab3">"Asistencia"</a> y para
+    acceder al registro de asignaturas selecciona la pestaña <a href="/tabs/tab3">"Asistencia"</a> y desliza para abajo.</p>
 </ion-content>
