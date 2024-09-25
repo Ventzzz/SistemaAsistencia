@@ -6,7 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class AuthService {
   private _storage: Storage | null = null;
-  private currentUser: string | null = null; // Variable para almacenar el nombre del usuario logueado
+  private currentUser: string | null = null; 
 
   constructor(private storage: Storage) {
     this.init();
@@ -29,7 +29,7 @@ export class AuthService {
   async login(Nombre: string, password: string) {
     const user = await this._storage?.get(Nombre);
     if (user && user.password === password) {
-      this.currentUser = Nombre; // Guardar el nombre del usuario logueado
+      this.currentUser = Nombre; 
       return true;
     } else {
       throw new Error('Usuario o contraseña incorrectos');
@@ -37,10 +37,10 @@ export class AuthService {
   }
 
   async getCurrentUser() {
-    return this.currentUser; // Retorna el nombre del usuario logueado
+    return this.currentUser; 
   }
 
   async logout() {
-    this.currentUser = null; // Limpiar el nombre del usuario al cerrar sesión
+    this.currentUser = null; 
   }
 }

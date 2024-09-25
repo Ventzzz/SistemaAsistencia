@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service'; // Asegúrate de que esta ruta es correcta
+import { AuthService } from '../auth.service'; 
 
 @Component({
   selector: 'app-tab1',
@@ -7,11 +7,11 @@ import { AuthService } from '../auth.service'; // Asegúrate de que esta ruta es
   styleUrls: ['./tab1.page.scss'],
 })
 export class Tab1Page implements OnInit {
-  nombreUsuario: string | null = null; // Declarar la propiedad
+  nombreUsuario: string | null = null; 
 
   constructor(private authService: AuthService) {}
 
   async ngOnInit() {
-    this.nombreUsuario = await this.authService.getCurrentUser(); // Obtener el nombre del usuario logueado
+    this.nombreUsuario = await this.authService.getCurrentUser(); 
   }
 }
