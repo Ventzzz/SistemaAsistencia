@@ -45,13 +45,23 @@ import { AlertController, ToastController } from '@ionic/angular';
 
   async recoverPassword() {
     const alert = await this.alertController.create({
-      header: 'Recuperar contraseña',
-      message: 'Por favor, introduce tu correo electrónico para enviar un enlace de recuperación.',
+      header: 'Cambiar contraseña',
+      message: 'Por favor, introduce tu usuario y la nueva contraseña.',
       inputs: [
         {
-          name: 'email',
-          type: 'email',
-          placeholder: 'Correo Electrónico'
+          name: 'Nombre',
+          type: 'text',
+          placeholder: 'Usuario'
+        },
+        {
+          name: 'newPassword',
+          type: 'password',
+          placeholder: 'Nueva contraseña'
+        },
+        {
+          name: 'confirmPassword',
+          type: 'password',
+          placeholder: 'Confirmar nueva contraseña'
         }
       ],
       buttons: [
@@ -60,15 +70,24 @@ import { AlertController, ToastController } from '@ionic/angular';
           role: 'cancel',
         },
         {
-          text: 'Enviar',
-          handler: (data) => {
-            if (data.email) {
-              this.showToast('Se ha enviado el enlace de recuperación a tu correo.');
+          text: 'Cambiar',
+          handler: async (data) => {
+            if (data.Nombre && data.newPassword && data.confirmPassword) {
+              if (data.newPassword !== data.confirmPassword) {
+                this.showToast('Las contraseñas no coinciden.');
+              } else {
+                try {
+                  await this.authService.updatePassword(data.Nombre, data.newPassword);
+                  this.showToast('Contraseña actualizada exitosamente.');
+                } catch (error) {
+                  this.showToast('Usuario no encontrado.');
+                }
+              }
             } else {
-              this.showToast('Por favor, introduce un correo válido.');
+              this.showToast('Por favor, completa todos los campos.');
             }
+          }
         }
-      }
       ]
     });
     await alert.present();

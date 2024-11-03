@@ -36,6 +36,15 @@ export class AuthService {
     }
   }
 
+  async updatePassword(Nombre: string, newPassword: string) {
+    const user = await this._storage?.get(Nombre);
+    if (user) {
+      await this._storage?.set(Nombre, { ...user, password: newPassword });
+    } else {
+      throw new Error('Usuario no encontrado');
+    }
+  }
+
   async getCurrentUser() {
     return this.currentUser; 
   }
