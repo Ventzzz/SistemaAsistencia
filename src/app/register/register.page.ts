@@ -19,14 +19,15 @@ export class RegisterPage {
     this.formRegister = this.fb.group({
       Nombre: ['', [Validators.required, Validators.minLength(4)]],
       contraseña: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['', Validators.required]  // Valor predeterminado: 'user'
     });
   }
 
   async registrar() {
     if (this.formRegister.valid) {
-      const { Nombre, contraseña } = this.formRegister.value;
+      const { Nombre, contraseña, role } = this.formRegister.value; // Incluye el rol
       try {
-        await this.authService.register(Nombre, contraseña);
+        await this.authService.register(Nombre, contraseña, role); // Pasa los tres argumentos
         this.navCtrl.navigateRoot('/login'); 
       } catch (err) {
         if (err instanceof Error) {

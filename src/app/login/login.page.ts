@@ -15,6 +15,7 @@ import { AlertController, ToastController } from '@ionic/angular';
     formRegister: any;
   mensaje: string = '';
   fail: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +36,8 @@ import { AlertController, ToastController } from '@ionic/angular';
       this.fail = false;
       try {
         await this.authService.login(Nombre, contraseña);
+        const role = await this.authService.getUserRole();
+        this.isAdmin = role === 'admin';
         this.navCtrl.navigateRoot(''); 
       } catch (err: any) { 
         this.mensaje = 'Error al iniciar sesión:';
