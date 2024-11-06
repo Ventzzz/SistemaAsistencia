@@ -19,26 +19,26 @@
 
 </ion-segment>
 
-  <!-- Scan QR -->
+  <!-- Scanear QR -->
   <div class="segment"  *ngIf="segment === 'scan'">
-    <div class="segment-conten"></div>
+
+    <div class="segment-content"></div>
 
     <img src="assets/images/scan-qr.webp" alt="">
 
-    <h6 class="scan-label" >Escanea una imagen para obtener su valor</h6>
+    <h6 class="scan-label">Escanea una imagen para obtener su valor</h6>
 
     <ion-row>
       <ion-col size="6">
-        <ion-button onclick="StarScan()" class="submit" expand="block">
+        <ion-button (click)="StarScan()" class="submit" expand="block">
           Escanear
           <ion-icon slot="end" name="scan-outline"></ion-icon>
         </ion-button>
       </ion-col>
-    
   
     <ion-col size="6">
-      <ion-button class="submit" expand="block">
-        Selccionar
+      <ion-button (click)="readBarcodeFromImage()" class="submit" expand="block">
+        Seleccionar
         <ion-icon slot="end" name="image-outline"></ion-icon>
       </ion-button>
     </ion-col>  
@@ -50,6 +50,16 @@
       <p>Resultado del escaneo</p>
       <div>{{scanResult}}</div>
     </ion-label>
+    <ion-buttons slot="end">
+
+      <ion-button *ngIf="isUrl()" color="tertiary" (click)="openCapacitorSite()">
+        <ion-icon slot="icon-only" name="globe-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button  color="tertiary" (click)="writeToClipboard()">
+        <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-item>
 
 

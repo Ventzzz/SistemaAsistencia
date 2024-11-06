@@ -22,7 +22,6 @@ ion-segment{
    }
    
    .result{
-     color: black;
      border: 1px dashed var(--ion-color-medium);
      border-radius: 10px;
      margin: 30px 0;
@@ -67,6 +66,9 @@ ion-segment{
      justify-content: center;
      align-items: center;
    }
-   
-   
+
+   .colorW{
+    color: white;
+   }
+
    
