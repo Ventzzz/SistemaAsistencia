@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+  <ion-card class="register-card">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Crear una Cuenta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formRegister">
+        <ion-item class="input-item">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="Nombre"></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input formControlName="contraseña" type="password"></ion-input>
+        </ion-item>
+        <!-- Campo de selección de rol -->
+        <ion-item class="input-item">
+          <ion-label position="floating">Rol</ion-label>
+          <ion-select formControlName="role">
+            <ion-select-option value="user">Usuario</ion-select-option>
+            <ion-select-option value="admin">Administrador</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </form>
+      <div class="ion-padding-top">
+        <ion-button expand="block" color="primary" (click)="registrar()">Registrarse</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/login']" color="secondary">Iniciar Sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

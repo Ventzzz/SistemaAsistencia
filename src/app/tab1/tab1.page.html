@@ -1,17 +1,51 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="duoc-header">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      inicio
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button fill="outline" [routerLink]="['/login']">
+        Salir
+        <ion-icon slot="end" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding ion-text-center duoc-content">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Inicio</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <h1>Bienvenido al sistema RegistrAPP</h1>
+
+  <p *ngIf="nombreUsuario">Bienvenido, {{ nombreUsuario }}</p>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Asignaturas</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        Para acceder a tus asignaturas selecciona la pestaña "Mis asignaturas" en el inferior o pincha en ir a asignaturas
+      </ion-card-content>
+    
+      <ion-button href="/tabs/tab2" fill="clear">Ir a Asignaturas</ion-button>
+    </ion-card>
+    <br>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Asistencia y asignaturas</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        para acceder a tus asistencias y a tu asignaturas selecciona la pestaña "Asistencia" en el inferior o pincha en "ir a asistencias"
+      </ion-card-content>
+    
+      <ion-button href="/tabs/tab3" fill="clear">Ir a asistencias</ion-button>
+    </ion-card>
+    <br>
+
 </ion-content>

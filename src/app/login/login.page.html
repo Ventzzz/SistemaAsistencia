@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="light">
+  <div *ngIf="fail == true">
+    <ion-toast position="top" id="toastId" isOpen="toastId" message="Su usuario o contraseña son incorrectos" [duration]="5000"></ion-toast>
+  </div>
+  <ion-card class="login-card">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Iniciar Sesión</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formLogin">
+        <ion-item class="input-item">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="Nombre"></ion-input>
+        </ion-item>
+        <ion-item class="input-item">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input formControlName="contraseña" type="password"></ion-input>
+        </ion-item>
+      </form>
+      <div class="ion-padding-top">
+        <ion-button expand="block" color="primary" (click)="ingresar()">Ingresar</ion-button>
+      </div>
+      <ion-button fill="clear" color="secondary" (click)="recoverPassword()">
+        ¿Olvidaste tu contraseña?
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/register']" color="secondary">Registrarse</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
