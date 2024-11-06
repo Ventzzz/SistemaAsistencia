@@ -14,43 +14,23 @@
   <h1>Asistencia</h1>
   <br><br>
 
-  <ion-list>
-    <ion-item>
-      <ion-label>Fecha</ion-label>
-      <ion-label>Asignatura</ion-label>
-      <ion-label>Presente</ion-label>
-    </ion-item>
-    <ion-item *ngFor="let asignatura of asignaturas">
-      <ion-label>{{ asignatura.fecha }}</ion-label>
-      <ion-label>{{ asignatura.asignatura }}</ion-label> 
-      <ion-label>{{ asignatura.presente }}</ion-label> 
-    </ion-item>
-  </ion-list>
-  <br>
+<div class="contenedor">
+  <ion-accordion-group *ngFor="let asignatura of asignaturas" class="accordion-item ion-item">
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light" class="ion-text-center">
+        <ion-label>{{ asignatura.asignatura }} </ion-label> 
+        <ion-label>{{asignatura.presente}}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">Texto</div>
+    </ion-accordion>
+  </ion-accordion-group>
+</div>
+<br>
+ 
+<!-- modal qr -->
 
-  <ion-button shape="round" (click)="verModal()">
+  <ion-button shape="round" (click)="abrirPaginaQr()">
     Crear código QR
   </ion-button>
-
-  <ion-modal [isOpen]="mostrar">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Asistencia</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="verModal()" color="primary">Cerrar</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <h3>Escanea para registrar asistencia</h3>
-        
-        <!-- Imagen QR desde internet -->
-        <img src="https://softmatic.com/images/QR%20Example%20Umlauts%20Accented.png" alt="Código QR" style="display: block; margin: 0 auto; width: 400px; height: 212px;">
-
-        
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 
 </ion-content>

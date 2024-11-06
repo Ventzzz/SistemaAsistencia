@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -13,13 +14,13 @@ export class Tab3Page {
   mostrar = false;
 
   asignaturas = [
-    {asignatura: "Programación de aplicaciones", fecha: "19-09-2021", presente: "Si" },
-    {asignatura: "Desarrollo de bases de datos", fecha: "20-09-2021", presente: "No" },
-    {asignatura: "Arquitectura de datos", fecha: "21-09-2021", presente: "Si"  },
+    {asignatura: "Programación de aplicaciones", fecha: "19-09-2021", presente: "89%" },
+    {asignatura: "Desarrollo de bases de datos", fecha: "20-09-2021", presente: "70%" },
+    {asignatura: "Arquitectura de datos", fecha: "21-09-2021", presente: "90%"  },
   ]
 
 
-  constructor() {
+  constructor(private router:Router) {
     this.presente = "";
     this.asignatura = "";
     this.fecha = "";
@@ -27,6 +28,12 @@ export class Tab3Page {
   verModal()
   {
     this.mostrar = !this.mostrar;
+  }
+
+  abrirPaginaQr()
+  {
+    this.router.navigate(['/scanner-qr']);
+
   }
 
   }
