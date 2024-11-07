@@ -36,6 +36,8 @@
     "@capawesome/capacitor-file-picker": "^6.1.0",
     "@ionic/angular": "^8.0.0",
     "@ionic/storage-angular": "^4.0.0",
+    "color": "^4.2.3",
+    "cors": "^2.8.5",
     "html2canvas": "^1.4.1",
     "ionic": "^5.4.16",
     "ionicons": "^7.0.0",

@@ -1,8 +1,6 @@
 <ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>
-      Mis asignaturas
-    </ion-title>
+    <ion-title>Mis asignaturas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,15 +14,47 @@
   <h1>Mis asignaturas</h1>
   <br><br>
 
+  <p *ngIf="isAdmin">Acceso exclusivo para el administrador</p>
+
   <ion-list>
     <ion-item>
-      <ion-label>Seccion</ion-label>
+      <ion-label>Hora</ion-label>
       <ion-label>Asignatura</ion-label>
     </ion-item>
     <ion-item *ngFor="let asignatura of asignaturas">
-      <ion-label>{{asignatura.nombre }}</ion-label>
-      <ion-label>{{asignatura.asignatura }}</ion-label> 
+      <ion-label>{{ asignatura.horario }}</ion-label>
+      <ion-label>{{ asignatura.nombre_clase }}</ion-label>
     </ion-item>
   </ion-list>
 
+  <ion-button shape="round" (click)="verModal()">Crear clase</ion-button>
+
+  <ion-modal [isOpen]="mostrar">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Crear Clase</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="verModal()" color="primary">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <h3>Complete los datos para crear una clase</h3>
+
+        <!-- Formulario para capturar los datos de la clase -->
+        <form (submit)="crearClase($event)">
+          <ion-item>
+            <ion-label position="floating">Nombre de la Clase</ion-label>
+            <ion-input [(ngModel)]="nombreClase" name="nombreClase" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Horario de la Clase</ion-label>
+            <ion-input [(ngModel)]="horarioClase" name="horarioClase" required></ion-input>
+          </ion-item>
+          <ion-button expand="block" type="submit" color="primary">Crear</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

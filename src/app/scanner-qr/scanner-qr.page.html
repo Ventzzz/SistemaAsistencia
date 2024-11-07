@@ -5,22 +5,20 @@
 </ion-header>
 
 <ion-content class="ion-padding ion-text-center">
-  
+
   <!-- Segments -->
-<ion-segment [(ngModel)]="segment">
+  <ion-segment [(ngModel)]="segment">
+    <ion-segment-button value="scan">
+      <ion-label>Scanner QR</ion-label>
+    </ion-segment-button>
 
-  <ion-segment-button value="scan">
-    <ion-label>Scanner QR</ion-label>
-  </ion-segment-button>
-
-  <ion-segment-button value="generate">
-    <ion-label>Generar QR</ion-label>
-  </ion-segment-button>
-
-</ion-segment>
-
+    <!-- Solo muestra el botón "Generar QR" si el usuario es admin -->
+    <ion-segment-button *ngIf="isAdmin" value="generate">
+      <ion-label>Generar QR</ion-label>
+    </ion-segment-button>
+  </ion-segment>
   <!-- Scanear QR -->
-  <div class="segment"  *ngIf="segment === 'scan'">
+  <div class="segment" *ngIf="segment === 'scan'">
 
     <div class="segment-content"></div>
 
@@ -35,35 +33,35 @@
           <ion-icon slot="end" name="scan-outline"></ion-icon>
         </ion-button>
       </ion-col>
-  
-    <ion-col size="6">
-      <ion-button (click)="readBarcodeFromImage()" class="submit" expand="block">
-        Seleccionar
-        <ion-icon slot="end" name="image-outline"></ion-icon>
-      </ion-button>
-    </ion-col>  
-  </ion-row>
 
-  <!-- Resultado del scaneo -->
-  <ion-item class="result" *ngIf="scanResult" lines="none">
-    <ion-label>
-      <p>Resultado del escaneo</p>
-      <div>{{scanResult}}</div>
-    </ion-label>
-    <ion-buttons slot="end">
+      <ion-col size="6">
+        <ion-button (click)="readBarcodeFromImage()" class="submit" expand="block">
+          Seleccionar
+          <ion-icon slot="end" name="image-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
-      <ion-button *ngIf="isUrl()" color="tertiary" (click)="openCapacitorSite()">
-        <ion-icon slot="icon-only" name="globe-outline"></ion-icon>
-      </ion-button>
+    <!-- Resultado del scaneo -->
+    <ion-item class="result" *ngIf="scanResult" lines="none">
+      <ion-label>
+        <p>Resultado del escaneo</p>
+        <div>{{scanResult}}</div>
+      </ion-label>
+      <ion-buttons slot="end">
 
-      <ion-button  color="tertiary" (click)="writeToClipboard()">
-        <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-item>
+        <ion-button *ngIf="isUrl()" color="tertiary" (click)="openCapacitorSite()">
+          <ion-icon slot="icon-only" name="globe-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button color="tertiary" (click)="writeToClipboard()">
+          <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
 
 
-</div>
+  </div>
   <!-- Generate QR -->
   <div class="segment" *ngIf="segment === 'generate'">
     <div class="segment-conten">
@@ -76,18 +74,21 @@
           </div>
 
         </div>
-          <div class="ion-padding-top">{{qrtext}}</div>
+        <div class="ion-padding-top">{{qrtext}}</div>
       </div>
 
 
-      <ion-textarea
-      label="escribe algo para compertir a qr"
-      labelPlacement="stacked"
-      fill="outline"
-      [(ngModel)] = "qrtext"
-      rows="3"
-      [autoGrow]="true"
-      ></ion-textarea>
+      <ion-textarea label="escribe algo para compertir a qr" labelPlacement="stacked" fill="outline"
+        [(ngModel)]="qrtext" rows="3" [autoGrow]="true"></ion-textarea>
+
+        <ion-textarea label="ID de clase" labelPlacement="stacked" fill="outline"
+        [(ngModel)]="idClase" rows="1" [autoGrow]="true"></ion-textarea>
+
+        <ion-button (click)="generarQR()" class="submit ion-margin-top" expand="block">
+          Generar QR
+          <ion-icon slot="end" name="share-social-outline"></ion-icon>
+        </ion-button>
+
 
 
       <!-- comartir qr -->
@@ -97,6 +98,6 @@
       </ion-button>
 
     </div>
- </div>
+  </div>
 
 </ion-content>
