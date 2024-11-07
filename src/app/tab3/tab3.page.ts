@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service'; // Asegúrate de importar AuthService para obtener el rol del usuario
+
 
 @Component({
   selector: 'app-tab3',
@@ -10,11 +12,16 @@ import { Router } from '@angular/router';
 })
 export class Tab3Page implements OnInit {
   clases: any[] = []; // Almacena la información de asistencia obtenida desde la API
+  idAlumno: any;
+  private apiUrl = 'https://asisduoc-api-77f03f161fc1.herokuapp.com'
+
 
   constructor(
     private http: HttpClient,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private authService: AuthService, // Inyectar AuthService para obtener el rol de usuario
+
   ) {}
 
   ngOnInit() {
@@ -23,17 +30,16 @@ export class Tab3Page implements OnInit {
   }
 
   // Método para obtener la asistencia desde la API
-  obtenerAsistencia() {
-    this.http.get<any[]>('https://asisduoc-api-77f03f161fc1.herokuapp.com/getAsistenciaAlumno')
-      .subscribe(
-        (data) => {
-          this.clases = data; // Almacena los datos de asistencia en el array de clases
-        },
-        (error) => {
-          console.error('Error al obtener asistencia:', error);
-          this.presentToast('Error al cargar la asistencia.');
-        }
-      );
+  async obtenerAsistencia() {
+    const idAlumno = await this.authService.getCurrentUserId();
+
+    const payload = { alumno_id:idAlumno }
+    this.http.post(`${this.apiUrl}/getAsistenciaAlumno`, payload).subscribe({
+      next: (response: any) => {console.log('Asistencia:', response)
+        this.clases = response.asistencia
+      },
+      error: (error) => console.error('Error al obtener asistencia:', error),
+    });
   }
 
   // Método para mostrar un mensaje de confirmación o error

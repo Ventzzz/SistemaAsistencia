@@ -71,10 +71,10 @@ export class ScannerQrPage implements OnInit {
     const { data } = await modal.onWillDismiss();
 
     if (data) {
-      this.scanResult = data?.barcode?.displayValue;
+      this.scanResult = data.barcode.displayValue;
 
       let idAlumno = await this.authService.getCurrentUserId();
-      const payload = { id_alumno:idAlumno, codigo:this.scanResult }
+      const payload = { id_alumno:idAlumno, codigo:await this.scanResult }
       this.http.post(`${this.apiUrl}/admitirAlumno`, payload).subscribe({
         next: (response: any) => {console.log('Alumno asistido:', response)
           console.log("alumno asistido")
