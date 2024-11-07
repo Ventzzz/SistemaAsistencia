@@ -44,16 +44,17 @@ export class ScannerQrPage implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    // Verificar si el usuario es administrador
     const role = await this.authService.getUserRole();
     this.isAdmin = role === 'admin';
 
     if (this.platform.is('capacitor')) {
-      BarcodeScanner.isSupported().then();
-      BarcodeScanner.checkPermissions().then();
-      BarcodeScanner.removeAllListeners();
+        const { camera } = await BarcodeScanner.checkPermissions();
+        if (camera !== 'granted') {
+            await BarcodeScanner.requestPermissions();
+        }
+        BarcodeScanner.removeAllListeners();
     }
-  }
+}
 
   async StarScan() {
     const modal = await this.modalController.create({

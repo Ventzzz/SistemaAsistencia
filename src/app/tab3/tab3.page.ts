@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,34 +8,45 @@ import { Router } from '@angular/router';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
+  clases: any[] = []; // Almacena la información de asistencia obtenida desde la API
 
-  presente: string;
-  asignatura : string;
-  fecha: string;
-  mostrar = false;
+  constructor(
+    private http: HttpClient,
+    private toastController: ToastController,
+    private router: Router
+  ) {}
 
-  asignaturas = [
-    {asignatura: "Programación de aplicaciones", fecha: "19-09-2021", presente: "89%" },
-    {asignatura: "Desarrollo de bases de datos", fecha: "20-09-2021", presente: "70%" },
-    {asignatura: "Arquitectura de datos", fecha: "21-09-2021", presente: "90%"  },
-  ]
-
-
-  constructor(private router:Router) {
-    this.presente = "";
-    this.asignatura = "";
-    this.fecha = "";
-  }
-  verModal()
-  {
-    this.mostrar = !this.mostrar;
+  ngOnInit() {
+    // Llama al método para obtener la asistencia al cargar el componente
+    this.obtenerAsistencia();
   }
 
-  abrirPaginaQr()
-  {
+  // Método para obtener la asistencia desde la API
+  obtenerAsistencia() {
+    this.http.get<any[]>('https://asisduoc-api-77f03f161fc1.herokuapp.com/getAsistenciaAlumno')
+      .subscribe(
+        (data) => {
+          this.clases = data; // Almacena los datos de asistencia en el array de clases
+        },
+        (error) => {
+          console.error('Error al obtener asistencia:', error);
+          this.presentToast('Error al cargar la asistencia.');
+        }
+      );
+  }
+
+  // Método para mostrar un mensaje de confirmación o error
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  abrirPaginaQr() {
     this.router.navigate(['/scanner-qr']);
-
   }
-
-  }
+}
