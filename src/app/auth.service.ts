@@ -68,6 +68,13 @@ export class AuthService {
     return this.currentUser; 
   }
 
+  async getCurrentUserId(){
+    const user = await this.getCurrentUser();
+    const userObject = await this._storage?.get(user!)
+    console.log(userObject)
+    return userObject.id
+  }
+
   async logout() {
     this.currentUser = null; 
   }

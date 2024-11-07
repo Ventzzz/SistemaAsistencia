@@ -71,8 +71,8 @@ export class ScannerQrPage implements OnInit {
 
     if (data) {
       this.scanResult = data?.barcode?.displayValue;
-      
-      let idAlumno = this.authService.getCurrentUser;
+
+      let idAlumno = await this.authService.getCurrentUserId();
       const payload = { id_alumno:idAlumno, codigo:this.scanResult }
       this.http.post(`${this.apiUrl}/admitirAlumno`, payload).subscribe({
         next: (response: any) => {console.log('Alumno asistido:', response)
@@ -85,6 +85,7 @@ export class ScannerQrPage implements OnInit {
 
   // Leer código de barras de una imagen y guardar en la variable 'scanResult'
   async readBarcodeFromImage() {
+    let idAlumno = await this.authService.getCurrentUser();
     const { files } = await FilePicker.pickImages({});
     const path = files[0]?.path;
 
@@ -96,7 +97,6 @@ export class ScannerQrPage implements OnInit {
     });
 
     this.scanResult = barcodes[0].displayValue;
-    let idAlumno = this.authService.getCurrentUser;
     const payload = { id_alumno:idAlumno, codigo:this.scanResult }
     this.http.post(`${this.apiUrl}/admitirAlumno`, payload).subscribe({
       next: (response: any) => {console.log('Alumno asistido:', response)
