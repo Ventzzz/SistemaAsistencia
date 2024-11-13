@@ -32,6 +32,7 @@ export class ScannerQrPage implements OnInit {
   isAdmin: boolean = false; // Agregar propiedad isAdmin
   private apiUrl = 'https://asisduoc-api-77f03f161fc1.herokuapp.com'
   private _storage: any;
+  clases: any[] = [];
 
   constructor(
     private loadingController: LoadingController,
@@ -54,6 +55,7 @@ export class ScannerQrPage implements OnInit {
         }
         BarcodeScanner.removeAllListeners();
     }
+    this.obtenerClases();
 }
 
   async StarScan() {
@@ -83,7 +85,16 @@ export class ScannerQrPage implements OnInit {
       });
     }
   }
-
+  obtenerClases() {
+    this.http.get<any[]>('https://asisduoc-api-77f03f161fc1.herokuapp.com/obtenerClases').subscribe(
+      (data) => {
+        this.clases = data;
+      },
+      (error) => {
+        console.error('Error al obtener clases:', error);
+      }
+    );
+  }
   // Leer código de barras de una imagen y guardar en la variable 'scanResult'
   async readBarcodeFromImage() {
     let idAlumno = await this.authService.getCurrentUser();

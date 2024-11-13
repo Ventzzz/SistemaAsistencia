@@ -78,11 +78,9 @@
       </div>
 
 
-      <ion-textarea label="escribe algo para compertir a qr" labelPlacement="stacked" fill="outline"
-        [(ngModel)]="qrtext" rows="3" [autoGrow]="true"></ion-textarea>
-
-        <ion-textarea label="ID de clase" labelPlacement="stacked" fill="outline"
-        [(ngModel)]="idClase" rows="1" [autoGrow]="true"></ion-textarea>
+      <ion-select label="ID de clase" labelPlacement="stacked" fill="outline" [(ngModel)]="idClase">
+        <ion-select-option *ngFor="let clase of clases" [value]="clase.id">{{ clase.nombre_clase }}</ion-select-option>
+      </ion-select>
 
         <ion-button (click)="generarQR()" class="submit ion-margin-top" expand="block">
           Generar QR

@@ -18,8 +18,8 @@
     <ion-accordion-group *ngFor="let clase of clases" class="accordion-item ion-item">
       <ion-accordion value="second">
         <ion-item slot="header" color="light" class="ion-text-center">
-          <ion-label>ID Clase: {{ clase.id_clase }}</ion-label>
-          <ion-label>ID Alumno: {{ clase.id_alumno }}</ion-label>
+          <ion-label>ID Clase: {{ clase.clase_id }}</ion-label>
+          <ion-label>ID Alumno: {{ clase.alumno_id }}</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
           Hora: {{ clase.hora }}

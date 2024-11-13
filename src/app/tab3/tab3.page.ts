@@ -24,7 +24,7 @@ export class Tab3Page implements OnInit {
 
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     // Llama al método para obtener la asistencia al cargar el componente
     this.obtenerAsistencia();
   }
