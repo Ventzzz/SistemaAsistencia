@@ -31,20 +31,29 @@ import { AlertController, ToastController } from '@ionic/angular';
   }
 
   async ingresar() {
-    if (this.formLogin.valid) {
-      const { Nombre, contraseña } = this.formLogin.value;
-      this.fail = false;
-      try {
-        await this.authService.login(Nombre, contraseña);
-        const role = await this.authService.getUserRole();
-        this.isAdmin = role === 'admin';
-        this.navCtrl.navigateRoot('');
-      } catch (err: any) { 
-        this.mensaje = 'Error al iniciar sesión: ' + err.message;
-        this.fail = true;
-      }
+    if (this.formLogin.invalid) {
+      this.fail = true;
+      this.mensaje = 'Campos inválidos';  // Mensaje de error en caso de formulario inválido
+      this.showToast(this.mensaje); // Muestra el toast con el mensaje
+      return;  // No hacer nada más si el formulario es inválido
+    }
+  
+    const { Nombre, contraseña } = this.formLogin.value;
+    this.fail = false;
+    try {
+      await this.authService.login(Nombre, contraseña);
+      const role = await this.authService.getUserRole();
+      this.isAdmin = role === 'admin';
+      this.navCtrl.navigateRoot('');
+      this.showToast('Login exitoso');  // Aquí agregamos el toast en caso de éxito
+    } catch (err: any) {
+      this.mensaje = 'Error al iniciar sesión: ' + err.message;
+      this.fail = true;
+      this.showToast(this.mensaje); // Muestra el toast en caso de error
     }
   }
+  
+  
   
 
   async recoverPassword() {

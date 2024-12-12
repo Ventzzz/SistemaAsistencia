@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { NavController } from '@ionic/angular';
@@ -10,36 +10,38 @@ import { NavController } from '@ionic/angular';
 })
 export class RegisterPage {
   formRegister: FormGroup;
-  toastController: any;
+  fail: boolean = false;
+  mensaje: string = '';
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private authService: AuthService,
-    private navCtrl: NavController
+    private navController: NavController
   ) {
-    this.formRegister = this.fb.group({
-      Nombre: ['', [Validators.required, Validators.minLength(4)]],
+    this.formRegister = this.formBuilder.group({
+      Nombre: ['', Validators.required],
       contraseña: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['', Validators.required],  // Asegúrate de incluir el campo 'role'
-      id:  [''] 
+      role: ['', Validators.required],
+      id: ['']
     });
   }
 
-  registrar() {
-    if (this.formRegister.valid) {
-      const { Nombre, contraseña, role } = this.formRegister.value; // Incluye el rol
-      try {
-        this.authService.register(Nombre, contraseña, role); // Pasa los tres argumentos
-        this.navCtrl.navigateRoot('/login');
-      } catch (err) {
-        if (err instanceof Error) {
-          console.error('Error al registrar usuario:', err.message);
-        } else {
-          console.error('Error desconocido:', err);
-        }
+  async registrar() {
+    if (this.formRegister.invalid) {
+      this.fail = true;
+      this.mensaje = 'Campos inválidos';  // Aquí puedes agregar más lógica para campos específicos
+      return;
+    }
+
+    try {
+      const { Nombre, contraseña, role } = this.formRegister.value;
+      const response = await this.authService.register(Nombre, contraseña, role);
+      if (response) {
+        this.navController.navigateRoot('/login');
       }
+    } catch (error: unknown) {
+      this.fail = true;
+      this.mensaje = (error as Error).message;  // Usamos type assertion
     }
   }
-  
-  
 }
